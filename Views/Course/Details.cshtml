@@ -1,0 +1,78 @@
+﻿@model HeThongDangKyDuHoc.Models.DuHoc
+@using HeThongDangKyDuHoc.Models
+
+@{
+    ViewData["Title"] = "Chi tiết du học";
+    List<DuHoc> recentList = (List<DuHoc>)ViewData["recentList"];
+}
+
+<!-- Detail Start -->
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="mb-5">
+                    <div class="section-title position-relative mb-5">
+                        <h6 class="d-inline-block position-relative text-secondary text-uppercase pb-2">Course Detail</h6>
+                        <h1 class="display-4">@Model.Ten</h1>
+                    </div>
+                    <img class="img-fluid rounded w-100 mb-4" src="~/img/courses/@Model.Image" alt="Image">
+                    <p>
+                        @Model.MoTa
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mt-5 mt-lg-0">
+                <div class="bg-primary mb-5 py-3">
+                    <h3 class="text-white py-3 px-4 m-0">Thông tin du học</h3>
+                    <div class="d-flex justify-content-between border-bottom px-4">
+                        <h6 class="text-white my-3">Quốc gia</h6>
+                        <h6 class="text-white my-3">@Model.QuocGia</h6>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom px-4">
+                        <h6 class="text-white my-3">Thời gian</h6>
+                        <h6 class="text-white my-3">@Model.ThoiGian</h6>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom px-4">
+                        <h6 class="text-white my-3">Học phí</h6>
+                        <h6 class="text-white my-3">@Model.HocPhi</h6>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom px-4">
+                        <h6 class="text-white my-3">Website</h6>
+                        <h6 class="text-white my-3">@Model.Website</h6>
+                    </div>
+                    <div class="d-flex justify-content-between border-bottom px-4">
+                        <h6 class="text-white my-3">Email liên hệ</h6>
+                        <h6 class="text-white my-3">@Model.Email</h6>
+                    </div>
+                    <div class="d-flex justify-content-between px-4">
+                        <h6 class="text-white my-3">SDT liên hệ</h6>
+                        <h6 class="text-white my-3">@Model.SoDienThoai</h6>
+                    </div>
+                    <div class="py-3 px-4">
+                        <a class="btn btn-block btn-secondary py-3 px-5" asp-controller="Course" asp-action="Enroll" asp-route-id="@Model.MaKhoaDuHoc">Đăng ký du học</a>
+                    </div>
+                </div>
+
+                <div class="mb-5">
+                    <h2 class="mb-4">Recent Courses</h2>
+                    @if(recentList != null)
+                    @foreach(DuHoc dh in recentList)
+                    {
+                        <a class="d-flex align-items-center text-decoration-none mb-4" asp-action="Details" asp-route-id = "@dh.MaKhoaDuHoc">
+                            <img class="img-fluid rounded" src="~/img/courses/@dh.Image" alt="" style="max-height: 80px; max-width: 80px;">
+                            <div class="pl-3">
+                                <h6>@dh.Ten</h6>
+                                <div class="d-flex">
+                                    <small class="text-body mr-3"><i class="fa fa-graduation-cap text-primary mr-2"></i>@dh.TenTruong</small>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Detail End -->

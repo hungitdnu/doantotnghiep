@@ -1,0 +1,163 @@
+﻿@using HeThongDangKyDuHoc.Models
+@model List<DuHoc>
+@{
+    bool isSearch = ViewBag.isSearch;
+    string currentAction = isSearch ? "SearchCourse" : "Course";
+    int page = ViewBag.page;
+    int total = ViewBag.total;
+    int start = (page - 1) * 10 + 1;
+    int end = page * 10 > total ? total : page * 10;
+    string searchBy = ViewBag.SearchBy;
+    string sortOrder = ViewBag.SortOrder;
+    string orderBy = ViewBag.OrderBy;
+    string keyword = ViewBag.Keyword;
+
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>List Course</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">Course</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!--Tìm kiếm -->
+    <section class="content">
+        <div class="container-fluid">
+            <h2 class="text-center display-4">Search</h2>
+            <form asp-action="SearchCourse" method="get">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>Search By:</label>
+                                    <select class="form-control" style="width: 100%;" name="SearchBy">
+                                        <option selected value="name">Name</option>
+                                        <option value="school">School</option>
+                                        <option value="country">Country</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>Sort Order:</label>
+                                    <select class="form-control" style="width: 100%;" name="SortOrder">
+                                        <option selected value="asc">ASC</option>
+                                        <option value="desc">DESC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label>Order By:</label>
+                                    <select class="form-control" style="width: 100%;" name="OrderBy">
+                                        <option selected value="name">Name</option>
+                                        <option value="price">Price</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <input type="search" class="form-control form-control-lg" name="Keyword" placeholder="Type your keywords here" value="" required>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-lg btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <a asp-action="AddCourse" class="btn btn-primary">Add course</a>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID Course</th>
+                                        <th>Name</th>
+                                        <th>Country</th>
+                                        <th>Price</th>
+                                        <th>Time</th>
+                                        <th>School Name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (DuHoc dh in Model)
+                                    {
+                                        <tr>
+                                            <td>@dh.MaKhoaDuHoc</td>
+                                            <td>@dh.Ten</td>
+                                            <td>@dh.QuocGia</td>
+                                            <td>@dh.HocPhi</td>
+                                            <td>@dh.ThoiGian</td>
+                                            <td>@dh.TenTruong</td>
+                                            <td>
+                                                <a asp-action="Details" asp-controller="Course" asp-route-id="@dh.MaKhoaDuHoc" class="btn btn-primary">
+                                                    View &nbsp;<i class="fas fa-eye"></i>
+                                                </a> |
+                                                <a asp-action="EditCourse" asp-route-id="@dh.MaKhoaDuHoc" class="btn btn-info">
+                                                    Edit &nbsp;<i class="fa fa-pen"></i>
+                                                </a> |
+                                                <a asp-action="DeleteCourse" asp-route-id="@dh.MaKhoaDuHoc" class="btn btn-danger">
+                                                    Delete &nbsp;<i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <div class="card-footer p-0">
+                <div class="mailbox-controls">
+                    <div class="float-right">
+                        @start-@end/@total
+                        <div class="btn-group">
+                            <a asp-action="@currentAction" asp-route-page="@(page-1)" asp-route-SearchBy="@searchBy" asp-route-SortOrder="@sortOrder" asp-route-OrderBy="@orderBy" asp-route-Keyword="@keyword" class="btn btn-default btn-sm">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                            <a asp-action="@currentAction" asp-route-page="@(page+1)" asp-route-SearchBy="@searchBy" asp-route-SortOrder="@sortOrder" asp-route-OrderBy="@orderBy" asp-route-Keyword="@keyword" class="btn btn-default btn-sm">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                        <!-- /.btn-group -->
+                    </div>
+                    <!-- /.float-right -->
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>
+

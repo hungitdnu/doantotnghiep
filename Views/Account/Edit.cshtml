@@ -1,0 +1,149 @@
+﻿@model HeThongDangKyDuHoc.Models.Account
+@{
+    SinhVien sv = ViewBag.SinhVien;
+    List<CustomNotification> notis = ViewBag.Notis;
+    GiaDinhSinhVien gd = sv.giaDinhSinhVien;
+    if(gd == null)
+    {
+        gd = new GiaDinhSinhVien();
+    }
+}
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+<section style="background-color: #eee;">
+    <div class="m-5 py-5">
+        
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="~/img/avatars/@sv.HinhAnh" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">@sv.HoTen</h5>
+                        <p class="text-muted mb-1">Ngành: @sv.MaNganh</p>
+                        <p class="text-muted mb-4">Lớp: @sv.MaLop</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Email</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="email" name="Email" value="@sv.Email" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Phone</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" name="Phone" value="@sv.SoDienThoai" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Địa chỉ</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="text" name="DiaChi" value="@sv.DiaChi" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Avatar cá nhân</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input class="form-control" type="file" name="Image">
+                                </div>
+                            </div>
+                            <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <input type="hidden" value="@sv.MaSinhVien" name="IdSinhVien" readonly />
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="mb-0">Họ tên bố</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="HoTenBo" value="@gd.HoTenBo" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="mb-0">Nghề nghiệp bố</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="NgheNghiepBo" value="@gd.NgheNghiepBo" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="mb-0">SĐT Bố</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="SoDienThoaiBo" value="@gd.SoDienThoaiBo" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="mb-0">Họ tên mẹ</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="HoTenMe" value="@gd.HoTenMe" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="mb-0">Nghề nghiệp mẹ</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="NgheNghiepMe" value="@gd.NgheNghiepMe" required>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="mb-0">SĐT Mẹ</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="SoDienThoaiMe" value="@gd.SoDienThoaiMe" required>
+                                </div>
+                            </div>
+                            <hr>
+                            
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <input type="submit" class="btn btn-primary pl-3 pr-3" value="Lưu">
+                                    <a class="btn btn-danger pl-3 pr-3" asp-action="Index">Hủy</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+                <div class="notification w-100">
+                    @foreach (CustomNotification notification in notis)
+                    {
+                        <div class="alert alert-@notification.Type mb-3" role="alert">
+                            @notification.Message
+                        </div>
+                    }
+                </div>
+        </div>
+    </div>
+</section>
+</form>

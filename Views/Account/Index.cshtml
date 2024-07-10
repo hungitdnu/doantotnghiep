@@ -1,0 +1,157 @@
+﻿@model HeThongDangKyDuHoc.Models.Account
+@{
+    SinhVien sv = ViewBag.SinhVien;
+    GiaDinhSinhVien gd = sv.giaDinhSinhVien;
+    if(gd == null)
+    {
+        gd = new GiaDinhSinhVien();
+    }
+}
+
+<section style="background-color: #eee;">
+    <div class="m-5 py-5">
+        <div class="row">
+            <div class="col">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="~/img/avatars/@sv.HinhAnh" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">@sv.HoTen</h5>
+                        <p class="text-muted mb-1">Ngành: @sv.MaNganh</p>
+                        <p class="text-muted mb-4">Lớp: @sv.MaLop</p>
+                        <div class="row">
+                            <div class="col-sm-12 mb-3">
+                                <a class="btn btn-success pl-4 pr-4" asp-action="Documents">Hồ sơ</a>
+                                <a class="btn btn-info pl-2 pr-2" asp-action="ViewRegisterStatus">DS.Đăng ký</a>
+                            </div>
+                            <div class="col-sm-12">
+                                <a class="btn btn-primary pl-3 pr-3" asp-action="Edit">Sửa T.tin</a>
+                                <a class="btn btn-success pl-3 pr-3" asp-action="ChangePassword">Đổi mật khẩu</a>
+                                <a class="btn btn-danger pl-3 pr-3" asp-action="Logout">Đăng xuất</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="mb-0">Họ tên bố</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">@gd.HoTenBo</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="mb-0">Nghề nghiệp bố</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">@gd.NgheNghiepBo</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="mb-0">SDT Bố</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">@gd.SoDienThoaiBo</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="mb-0">Họ tên mẹ</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">@gd.HoTenMe</p>
+                            </div>
+                        </div>
+                        <hr><div class="row">
+                            <div class="col-sm-6">
+                                <p class="mb-0">Nghề nghiệp mẹ</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">@gd.NgheNghiepMe</p>
+                            </div>
+                        </div> <hr>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p class="mb-0">SDT Mẹ</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="text-muted mb-0">@gd.SoDienThoaiMe</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Khóa</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@sv.NienKhoa</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@sv.Email</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Phone</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@sv.SoDienThoai</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Giới tính</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@sv.GioiTinh</p>
+                            </div>
+                        </div>
+                        <hr><div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Ngày sinh</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@sv.NgaySinh.Date.ToString("dd/MM/yyyy")</p>
+                            </div>
+                        </div> <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Address</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">@sv.DiaChi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

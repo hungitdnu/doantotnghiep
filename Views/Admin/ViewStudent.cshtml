@@ -1,0 +1,241 @@
+﻿@model SinhVien
+@{
+    List<string> thongBao = ViewBag.ThongBao;
+    string typeTB = ViewBag.TypeTB;
+    bool isEdit = ViewBag.isEdit;
+    GiaDinhSinhVien gd = Model.giaDinhSinhVien;
+    if (gd == null)
+    {
+        gd = new GiaDinhSinhVien();
+    }
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Profile</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">View Student</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Profile Image -->
+                    <div class="card card-primary card-outline">
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <img class=" img-fluid img-circle" src="~/img/avatars/@Model.HinhAnh" alt="User profile picture" style="max-width:128px; max-height:128px">
+                            </div>
+                            <h3 class="profile-username text-center">@Model.HoTen</h3>
+                            <ul class="list-group list-group-unbordered mb-3">
+                                <li class="list-group-item">
+                                    <b>Mã sinh viên</b> <a class="float-right">@Model.MaSinhVien</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Email</b> <a class="float-right">@Model.Email</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>CCCD</b> <a class="float-right">@Model.CMND</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Birth</b> <a class="float-right">@Model.NgaySinh.ToString("dd/MM/yyyy")</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Gender</b> <a class="float-right">@Model.GioiTinh</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <b>Phone</b> <a class="float-right">@Model.SoDienThoai</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Ngành học</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <strong>Mã ngành</strong>
+                            <p class="text-muted">@Model.MaNganh</p>
+                            <hr>
+                            <strong>Mã lớp</strong>
+                            <p class="text-muted">@Model.MaLop</p>
+                            <hr>
+                            <strong>Mã hệ đào tạo</strong>
+                            <p class="text-muted">
+                                @Model.MaHeDaoTao
+                            </p>
+                            <hr>
+                            <strong>Mã chương trình học</strong>
+                            <p class="text-muted">@Model.MaChuongTrinhHoc</p>
+                            <hr>
+                            <strong>Khóa</strong>
+                            <p class="text-muted">@Model.NienKhoa</p>
+                            <hr>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item"><a class="nav-link @(isEdit ? "" : "active")" href="#activity" data-toggle="tab">Hồ sơ</a></li>
+                                <li class="nav-item"><a class="nav-link @(isEdit ? "active" : "")" href="#settings" data-toggle="tab">Sửa thông tin</a></li>
+                            </ul>
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane @(isEdit ? "" : "active")" id="activity">
+                                    @foreach (TaiLieu tl in Model.tailieus)
+                                    {
+                                        <div class="post row">
+                                            <div class="user-block">
+                                                <h2 class="">@tl.TenTaiLieu</h2>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <img class="img-fluid" src="~/img/Documents/@tl.FileName" alt="Photo">
+                                            </div>
+                                            <!-- /.user-block -->
+                                            <div class="col-sm-3 d-flex align-items-center">
+                                                <h3>
+                                                    Ghi chú: @tl.GhiChu <br />
+                                                    @{
+                                                        string content = tl.isBanGoc ? "Bản gốc" : "Chứng thực";
+                                                        string badge = tl.isBanGoc ? "badge badge-primary" : "badge badge-secondary";
+                                                    }
+                                                    Loại:  <span class="@badge">@content</span>
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="post clearfix">
+                                    </div>
+                                </div>
+                                <div class="tab-pane @(isEdit ? "active" : "")" id="settings">
+                                    <form asp-action="EditStudent" method="post" enctype="multipart/form-data">
+                                        <input type="hidden" name="MaSinhVien" value="@Model.MaSinhVien" />
+                                        <div class="form-group row">
+                                            <label for="inputName" class="col-sm-2 col-form-label">FullName</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="inputName" name="HoTen" value="@Model.HoTen" placeholder="Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                                            <div class="col-sm-10">
+                                                <input type="email" class="form-control" id="inputEmail" name="Email" value="@Model.Email" placeholder="Email" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputName2" class="col-sm-2 col-form-label">Phone</label>
+                                            <div class="col-sm-10">
+                                                <input type="number" class="form-control" id="inputName2" name="SoDienThoai" value="@Model.SoDienThoai" placeholder="Phone Number" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputExperience" class="col-sm-2 col-form-label">Birth</label>
+                                            <div class="col-sm-10">
+                                                <input class="form-control" id="inputExperience" placeholder="Birthday" name="BirthDay" value="@Model.NgaySinh.Date.ToString("dd/MM/yyyy")" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputSkills" class="col-sm-2 col-form-label">Gender</label>
+                                            <div class="col-sm-10">
+                                                <select class="form-control" name="GioiTinh">
+                                                    @if (Model.GioiTinh.ToLower() == "nam")
+                                                    {
+                                                        <option value="Nam" selected>Nam</option>
+                                                        <option value="Nữ">Nữ</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="Nam">Nam</option>
+                                                        <option value="Nữ" selected>Nữ</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="newp" class="col-sm-2 col-form-label">Password</label>
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" name="new_password" value="" placeholder="Enter new password to reset">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputSkills" class="col-sm-2 col-form-label">Image</label>
+                                            <div class="col-sm-10">
+                                                <input type="file" class="form-control" name="Image" placeholder="Upload avatar" accept="image/*">
+                                            </div>
+                                        </div>
+                                        @if (typeTB != "")
+                                        {
+                                            <div class="form-group">
+                                                @foreach (string tb in thongBao)
+                                                {
+                                                    <div class="alert alert-@typeTB mt-3" role="alert">
+                                                        @tb
+                                                    </div>
+                                                }
+                                            </div>
+                                        }
+                                        <div class="form-group row">
+                                            <div class="offset-sm-2 col-sm-10">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-3">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Family</h3>
+                        </div>
+                        <div class="card-body">
+                            <strong>Họ tên bố</strong>
+                            <p class="text-muted">@gd.HoTenBo</p>
+                            <hr>
+                            <strong>Nghề nghiệp bố</strong>
+                            <p class="text-muted">@gd.NgheNghiepBo</p>
+                            <hr>
+                            <strong>SĐT Bố</strong>
+                            <p class="text-muted">
+                                @gd.SoDienThoaiBo
+                            </p>
+                            <hr>
+
+                            <strong>Họ tên mẹ</strong>
+                            <p class="text-muted">@gd.HoTenMe</p>
+                            <hr>
+                            <strong>Nghề nghiệp mẹ</strong>
+                            <p class="text-muted">@gd.NgheNghiepMe</p>
+                            <hr>
+                            <strong>SĐT mẹ</strong>
+                            <p class="text-muted">
+                                @gd.SoDienThoaiMe
+                            </p>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,68 @@
+﻿@model List<Register>
+@{
+    int pageCurrent = ViewBag.CurrentPage;
+    int totalPage = ViewBag.TotalPage;
+}
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <h1>Danh sách đăng ký</h1>
+        <ul class="list-group">
+            @foreach(var item in Model)
+            {
+                string badge = "Chưa duyệt";
+                string content = "warning";
+                switch(item.TrangThai)
+                {
+                    case 0:
+                        badge = "warning";
+                        content = "Đợi duyệt";
+                        break;
+                    case 1:
+                        badge = "success";
+                        content = "Đã duyệt";
+                        break;
+                    case -1:
+                        badge = "danger";
+                        content = "Từ chối";
+                        break;
+                }
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div class="card" style="width:100%">
+                        <div class="card-body">
+                            <h5 class="card-title">Yêu cầu đăng ký du học #@item.MaDangKy</h5>
+                            <p class="card-text">Thông tin: <a class="link-primary" asp-controller="Course" asp-action="Details" asp-route-id="@item.MaKhoaDuHoc">@item.KhoaDuHoc.Ten</a> </p>
+                            <p class="card-text">Trường: @item.KhoaDuHoc.TenTruong </p>
+                            <p class="card-text">Người phụ trách: @item.NguoiDuyet<p>
+                            <p class="card-text">Ghi chú: @item.GhiChu </p>
+                            <span class="badge badge-@badge p-2 mb-3">@content - @item.NgayCapNhat.ToString("HH:mm:ss dd/MM/yyyy")</span>
+                            @if(item.GhiChuAdmin != "")
+                            {
+                                <div class="alert alert-@badge rounded" role="alert">
+                                    @item.GhiChuAdmin
+                                </div>
+                            }
+                            @if(item.TrangThai == -1)
+                            {
+                                <form asp-controller="Course" asp-action="RequestAgain" method="post">
+                                    <input type="hidden" name="MaDangKy" value="@item.MaDangKy" readonly />
+                                    <div class="form-group">
+                                        <label for="rq">Yêu cầu duyệt lại</label>
+                                        <input type="text" class="form-control" id="rq" name="GhiChu" placeholder="Note">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            }
+                        </div>
+                    </div>
+                </li>
+            }
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" asp-action="ViewRegisterStatus" asp-route-page="@(pageCurrent-1)">&lt;</a></li>
+                    <li class="page-item"><span class="page-link text-center">@pageCurrent/@totalPage</span></li>
+                    <li class="page-item"><a class="page-link" asp-action="ViewRegisterStatus" asp-route-page="@(pageCurrent+1)">&gt;</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>

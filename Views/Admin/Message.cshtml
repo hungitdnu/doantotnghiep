@@ -1,0 +1,115 @@
+﻿@model List<TinNhan>
+@{
+    int page = ViewBag.page;
+    int total = ViewBag.total;
+    int start = (page - 1) * 10 + 1;
+    int end = page * 10 > total ? total: page * 10;
+    
+}
+
+<div class="content-wrapper">
+    
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Inbox</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Inbox</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- /.col -->
+            <div class="col-md-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">Inbox</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="Search Mail">
+                                <div class="input-group-append">
+                                    <div class="btn btn-primary">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body p-0">
+                        <div class="mailbox-controls">
+                            <div class="float-right">
+                                @start - @end/@total
+                                <div class="btn-group">
+                                    <a asp-action="Message" asp-route-page="@(page-1)" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+                                    <a asp-action="Message" asp-route-page="@(page+1)" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                                <!-- /.btn-group -->
+                            </div>
+                            <!-- /.float-right -->
+                        </div>
+                        <div class="table-responsive mailbox-messages">
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    @foreach(TinNhan tinnhan in Model)
+                                    {
+                                        var subject = tinnhan.Subject.Length > 20 ? tinnhan.Subject.Substring(0, 20) + "..." : tinnhan.Subject;
+                                        TimeSpan time  = DateTime.Now - tinnhan.NgayGui;
+                                        string timeStr = time.Days > 0 ? time.Days + " days ago" : time.Hours > 0 ? time.Hours + " hours ago" : time.Minutes > 0 ? time.Minutes + " minutes ago" : time.Seconds + " seconds ago";
+                                        <tr>
+                                            <td class="mailbox-name"><a asp-action="ViewMessage" asp-route-id="@tinnhan.Id">@tinnhan.FullName</a></td>
+                                            <td class="mailbox-subject">
+                                                <b>@tinnhan.Subject</b> - @subject
+                                            </td>
+                                            <td class="mailbox-date">@timeStr</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <!-- /.table -->
+                        </div>
+                        <!-- /.mail-box-messages -->
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer p-0">
+                        <div class="mailbox-controls">
+                            <div class="float-right">
+                                @start-@end/@total
+                                <div class="btn-group">
+                                    <a asp-action="Message" asp-route-page="@(page-1)" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+                                    <a asp-action="Message" asp-route-page="@(page+1)" class="btn btn-default btn-sm">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </div>
+                                <!-- /.btn-group -->
+                            </div>
+                            <!-- /.float-right -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+</div>

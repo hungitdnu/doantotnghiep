@@ -1,0 +1,52 @@
+﻿<div class="content-wrapper" style="min-height: 510px;">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Register List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">Register List</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <form method="get" asp-action="SearchRegister">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <input type="search" class="form-control form-control-lg" name="Keyword" placeholder="Find by ID Request" value="" required="">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-lg btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-danger">
+                        Không tìm thấy !
+                    </div>
+                </div>
+                <div class="col-6">
+                    <a asp-action="Form" class="btn btn-primary pl-3 pr-3">Back</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

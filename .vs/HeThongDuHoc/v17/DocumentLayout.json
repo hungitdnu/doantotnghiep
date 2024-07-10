@@ -1,0 +1,71 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Codes\\Dotnet\\HeThongDangKyDuHoc\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E41CD8A6-681A-45FC-9BDB-CD7F3C4959BC}|HeThongDangKyDuHoc.csproj|d:\\codes\\dotnet\\hethongdangkyduhoc\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E41CD8A6-681A-45FC-9BDB-CD7F3C4959BC}|HeThongDangKyDuHoc.csproj|solutionrelative:controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E41CD8A6-681A-45FC-9BDB-CD7F3C4959BC}|HeThongDangKyDuHoc.csproj|d:\\codes\\dotnet\\hethongdangkyduhoc\\views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E41CD8A6-681A-45FC-9BDB-CD7F3C4959BC}|HeThongDangKyDuHoc.csproj|solutionrelative:views\\account\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E41CD8A6-681A-45FC-9BDB-CD7F3C4959BC}|HeThongDangKyDuHoc.csproj|d:\\codes\\dotnet\\hethongdangkyduhoc\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E41CD8A6-681A-45FC-9BDB-CD7F3C4959BC}|HeThongDangKyDuHoc.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Codes\\Dotnet\\HeThongDangKyDuHoc\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Codes\\Dotnet\\HeThongDangKyDuHoc\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-17T01:33:23.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "D:\\Codes\\Dotnet\\HeThongDangKyDuHoc\\Views\\Account\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "Views\\Account\\ChangePassword.cshtml",
+              "ToolTip": "D:\\Codes\\Dotnet\\HeThongDangKyDuHoc\\Views\\Account\\ChangePassword.cshtml",
+              "RelativeToolTip": "Views\\Account\\ChangePassword.cshtml",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAAC8AAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-17T01:32:06.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "D:\\Codes\\Dotnet\\HeThongDangKyDuHoc\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountController.cs",
+              "ToolTip": "D:\\Codes\\Dotnet\\HeThongDangKyDuHoc\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "Controllers\\AccountController.cs",
+              "ViewState": "AQIAAE8BAAAAAAAAAAAIwFgBAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-17T01:28:48.693Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

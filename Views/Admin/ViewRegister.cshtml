@@ -1,0 +1,185 @@
+﻿@model Register
+@{
+    List<YeuCauDuHoc> YeuCaus = ViewBag.YeuCau;
+    SinhVien sinhvien = ViewBag.SinhVien;
+}
+<div class="content-wrapper" style="min-height: 510px;">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>View Register</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">View Student</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="bg-info mb-5 py-3">
+                        <h3 class="text-white py-3 px-4 m-0">Course Information</h3>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Country</h6>
+                            <h6 class="text-white my-3">@Model.KhoaDuHoc.QuocGia</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Time</h6>
+                            <h6 class="text-white my-3">@Model.KhoaDuHoc.ThoiGian</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Price</h6>
+                            <h6 class="text-white my-3">@Model.KhoaDuHoc.HocPhi</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Website</h6>
+                            <h6 class="text-white my-3">@Model.KhoaDuHoc.Website</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Email Contact</h6>
+                            <h6 class="text-white my-3">@Model.KhoaDuHoc.Email</h6>
+                        </div>
+                        <div class="d-flex justify-content-between px-4">
+                            <h6 class="text-white my-3">Phone Contact</h6>
+                            <h6 class="text-white my-3">@Model.KhoaDuHoc.SoDienThoai</h6>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="bg-success bg-gradient mb-5 py-3">
+                        <h3 class="text-white py-3 px-4 m-0">Student Information</h3>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">ID Student</h6>
+                            <h6 class="text-white my-3">@sinhvien.MaSinhVien</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Fullname</h6>
+                            <h6 class="text-white my-3">@sinhvien.HoTen</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Email</h6>
+                            <h6 class="text-white my-3">@sinhvien.Email</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Phone</h6>
+                            <h6 class="text-white my-3">@sinhvien.SoDienThoai</h6>
+                        </div>
+                        <div class="d-flex justify-content-between border-bottom px-4">
+                            <h6 class="text-white my-3">Address</h6>
+                            <h6 class="text-white my-3">@sinhvien.DiaChi</h6>
+                        </div>
+                        <div class="d-flex justify-content-between px-4">
+                            <a class="link-primary text-white my-3" asp-action="ViewStudent" asp-route-msv="@sinhvien.MaSinhVien">View</a>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <form asp-action="ChangeStatusRegister" method="post">
+                        <input type="hidden" value="@Model.MaDangKy" name="IdRegister" />
+                        <div class="form-group">
+                            <label for="stt">Status</label>
+                            <select class="form-control" id="stt" name="StatusCode">
+                                @if(Model.TrangThai == 0)
+                                {
+                                    <option value="0" selected>Pending</option>
+                                    <option value="1">Approved</option>
+                                    <option value="-1">Reject</option>
+                                }
+                                else if(Model.TrangThai == 1)
+                                {
+                                    <option value="0">Pending</option>
+                                    <option value="1" selected>Approved</option>
+                                    <option value="-1">Reject</option>
+                                }
+                                else
+                                {
+                                    <option value="0">Pending</option>
+                                    <option value="1">Approved</option>
+                                    <option value="-1" selected>Reject</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nt">Note</label>
+                            <textarea class="form-control" id="nt" name="Note" rows="3">@Model.GhiChuAdmin</textarea>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control btn-primary" type="submit" value="Save">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <p class="h3 m-3">Information</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="activity">
+                                    @foreach(var item in YeuCaus)
+                                    if(item.taiLieuSV != null)
+                                    {
+                                        <div class="post row">
+                                            <div class="user-block">
+                                                <h2 class="">@item.TenTaiLieu</h2>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <img class="img-fluid w-100" src="~/img/Documents/@item.taiLieuSV.FileName" alt="Photo">
+                                            </div>
+
+                                            <div class="col-sm-6 d-flex align-items-center">
+                                                <div class="card w-100">
+                                                    <div class="card-header bg-primary">
+                                                        Description
+                                                    </div>
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">
+                                                            Note: @item.taiLieuSV.GhiChu
+                                                        </li>
+                                                        <li class="list-group-item">
+                                                            Type : 
+                                                            @if(item.taiLieuSV.isBanGoc)
+                                                            {
+                                                                <span class="badge badge-success">Original</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge badge-warning">Copy</span>
+                                                            }
+                                                        </li>
+                                                        <li class="list-group-item">Requirement: @item.MoTa</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="post row">
+                                                <div class="user-block">
+                                                    <h2>@item.TenTaiLieu</h2>
+                                                </div>
+                                                <div class="col-sm-12 p-3 alert alert-danger">
+                                                    Thiếu
+                                                </div>
+                                            </div>
+                                        }
+                                    <div class="post clearfix">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

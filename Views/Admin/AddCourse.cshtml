@@ -1,0 +1,187 @@
+﻿@{
+    List<string> thongBao = ViewBag.ThongBao;
+    string typeTb = ViewBag.TypeTB;
+    List<TypeDocument> typeDocuments = ViewBag.ListTypeTaiLieu;
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Course</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">Course</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- Main content -->
+    <form method="post" asp-action="AddCourse" enctype="multipart/form-data">
+        <section class="content">
+            <div class="container-fluid">
+                @if (typeTb != "")
+                {
+                    <div class="form-group">
+                        @foreach (string tb in thongBao)
+                        {
+                            <div class="alert alert-@typeTb mt-3" role="alert">
+                                @tb
+                            </div>
+                        }
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Thông tin cơ bản</h3>
+                            </div>
+                            <div class="card-body box-profile">
+                                <ul class="list-group list-group-unbordered mb-3 mt-3">
+                                    <li class="list-group-item">
+                                        <b>Tên khóa</b> <input class="form-control" type="text" name="Ten" required="">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Tên trường</b> <input class="form-control" type="text" name="TenTruong" required="">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Quốc gia</b> <input class="form-control" type="text" name="QuocGia" required="">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Website</b> <input class="form-control" type="text" name="Website" required="">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Email liên hệ</b> <input class="form-control" type="email" name="Email" required="">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Số điện thoại liên hệ</b>
+                                        <input class="form-control" type="text" name="SoDienThoai" required="">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Học phí</b> <input class="form-control" type="number" name="HocPhi" required="">
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Thời gian</b>
+                                        <span class=""> <input required="" name="ThoiGian" type="text" class="form-control"></span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Mô tả</b>
+                                        <span class=""> <input required="" name="MoTa" type="text" class="form-control"></span>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Ảnh</b>
+                                        <span class=""> <input required="" name="Image" type="file" class="form-control form-control-lg" accept="image/*"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Yêu cầu khóa học</h3>
+                            </div>
+                            <div class="card-body box-profile">
+                                <ul class="list-group list-group-unbordered mb-3 mt-3">
+                                    <li class="list-group-item">
+                                        <input type="hidden" name="Requirements" value="" class="req" />
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Loại tài liệu</th>
+                                                    <th scope="col">Mô tả</th>
+                                                    <th scope="col"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="_tbody">
+                                                
+                                            </tbody>
+                                        </table>
+                                    </li>
+                                    <li class="row mt-2">
+                                        <div class="col-4">
+                                            <select class="form-control typeD">
+                                                @foreach(var item in typeDocuments)
+                                                {
+                                                    <option value="@item.LoaiTaiLieu">@item.TenTaiLieu</option>
+                                                })
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control contentD" name="xyz" placeholder="Nhập mô tả">
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="button" class="btnAddReq btn btn-primary">Thêm</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mb-3"><input type="submit" class="btn btn-primary"></div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+    </form>
+</div>
+<script>
+    const _$ = document.querySelector.bind(document);
+    const _$$ = document.querySelectorAll.bind(document);
+    const btnAddReq = _$('.btnAddReq');
+    const typeD = _$('.typeD');
+    const contentD = _$('.contentD');
+    const _tbody = _$('._tbody');
+    let id = 0;
+    function isExits(type) {
+        let items = _$$('._tbody > tr');
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].querySelector('td').innerText == type) {
+                return true;
+            }
+        }
+        return false;
+    }
+    btnAddReq.onclick = function () {
+        const type = typeD.value;
+        if (isExits(type) == true) {
+            alert("Bạn đã thêm yêu cầu này rồi !");
+            return;
+        }
+        const content = contentD.value;
+        contentD.value = "";
+        const tr = document.createElement('tr');
+        let i = id++;
+        tr.className = `tr${i}`;
+        tr.innerHTML = `
+            <td>${type}</td>
+            <td>${content}</td>
+            <td>
+                <button class="btn btn-danger" type="button" onclick="remove('tr${i}')">Remove</button>
+            </td>
+        `;
+        _tbody.appendChild(tr);
+    }
+    function remove(id) {
+        const tr = _$("tr." + id);
+        tr.remove();
+    }
+
+    const form = _$('form');
+    form.onsubmit = function () {
+        let items = _$$('._tbody > tr');
+        let req = [];
+        for (let i = 0; i < items.length; i++) {
+            let item = items[i];
+            let type = item.querySelector('td').innerText;
+            let content = item.querySelector('td:nth-child(2)').innerText;
+            let str = type + "|" + content;
+            req.push(str);
+        }
+        let input = _$('input.req');
+        input.value = req.join("^");
+    }
+</script>

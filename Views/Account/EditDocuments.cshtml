@@ -1,0 +1,96 @@
+﻿@model TaiLieu
+@{
+    List<CustomNotification> notis = ViewBag.Notis;
+    List<TypeDocument> typeDocuments = ViewBag.TypeDocuments;
+}
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="content-wrapper" style="min-height: 510px;">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Sửa hồ sơ</h1>
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- Main content -->
+            <form method="post" enctype="multipart/form-data" asp-action="EditDocuments">
+                <input type="hidden" value="@Model.MaTaiLieu" name="MaTaiLieu" />
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Profile Image -->
+                                <div class="card card-primary">
+                                    <div class="card-body box-profile">
+                                        <ul class="list-group list-group-unbordered mb-3 mt-3">
+                                            <li class="list-group-item text-center">
+                                                <img class="img-fluid" src="~/img/Documents/@Model.FileName" alt="@Model.TenTaiLieu"/>
+                                                <input class="form-control mt-2" type="file" name="Image">
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Loại tài liệu</b>
+                                                <select class="form-control" name="LoaiTaiLieu" required>
+                                                    @foreach(var typeDocument in typeDocuments)
+                                                    {
+                                                        if(typeDocument.LoaiTaiLieu == Model.LoaiTaiLieu)
+                                                        {
+                                                            <option value="@typeDocument.LoaiTaiLieu" selected>@typeDocument.TenTaiLieu</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@typeDocument.LoaiTaiLieu">@typeDocument.TenTaiLieu</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Ghi chú</b> <input class="form-control" type="text" name="GhiChu" value="@Model.GhiChu">
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Bản</b>
+                                                <select class="form-control" name="BanGoc">
+                                                    @if(Model.isBanGoc)
+                                                    {
+                                                        <option value="1" selected>Bản gốc</option>
+                                                        <option value="0">Bản sao/Công chứng</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="1">Bản gốc</option>
+                                                        <option value="0" selected>Bản sao/Công chứng</option>
+                                                    })
+                                                </select>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mb-2 mt-2">
+                                    @foreach (var item in notis)
+                                    {
+                                        <div class="alert alert-@item.Type mb-1" role="alert">
+                                            @item.Message
+                                        </div>
+                                    }
+                                </div>
+                                <div class="mt-3 mb-3">
+                                    <input type="submit" class="btn btn-primary pl-3 pr-3">
+                                    <a class="btn btn-danger ml-2 pl-3 pr-3" asp-action="DeleteDocument" asp-route-document_id="@Model.MaTaiLieu">Xóa</a>
+                                    <a class="btn btn-info ml-2 pl-3 pr-3" asp-action="Documents">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div><!-- /.container-fluid -->
+                </section>
+            </form>
+            <!-- /.content -->
+        </div>
+    </div>
+</section>

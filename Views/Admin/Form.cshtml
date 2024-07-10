@@ -1,0 +1,128 @@
+﻿@model List<Register>
+@{
+    int pageCurrent = ViewBag.page;
+    int totalPage = ViewBag.totalPage;
+}
+<div class="content-wrapper" style="min-height: 510px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Register List</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">Register List</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <!--Tìm kiếm -->
+    <section class="content">
+        <div class="container-fluid">
+            <form method="get" asp-action="SearchRegister">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <input type="search" class="form-control form-control-lg" name="Keyword" placeholder="Find by ID Request" value="" required="">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-lg btn-default">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <!-- /.card-header -->
+                        <div class="card-body table-responsive p-0">
+                            <table class="table table-hover text-nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Student</th>
+                                        <th>Date Created</th>
+                                        <th>Status</th>
+                                        <th>Teacher Approved</th>
+                                        <th>Last Update</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.MaDangKy</td>
+                                            <td>@item.MaSinhVien</td>
+                                            <td>@item.NgayTao.ToString("HH:mm:ss dd/MM/yyyy")</td>
+                                            <td>
+                                                @if (item.TrangThai == 0)
+                                                {
+                                                    <span class="badge badge-warning">Pending</span>
+                                                }
+                                                else if (item.TrangThai == 1)
+                                                {
+                                                    <span class="badge badge-success">Approved</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-danger">Rejected</span>
+                                                }
+                                            </td>
+                                            <td>@item.NguoiDuyet</td>
+                                            <td>@item.NgayCapNhat.ToString("HH:mm:ss dd/MM/yyyy")</td>
+                                            <td>
+                                                <a class="btn btn-primary" asp-action="ViewRegister" asp-route-id_register="@item.MaDangKy">
+                                                    View &nbsp;<i class="fas fa-eye"></i>
+                                                </a> |
+                                                <a class="btn btn-danger" asp-action="RejectRegister" asp-route-id_register="@item.MaDangKy">
+                                                    Reject &nbsp;<i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <div class="card-footer p-0">
+                <div class="mailbox-controls">
+                    <div class="float-right">
+                        @pageCurrent/@totalPage
+                        <div class="btn-group">
+                            <a class="btn btn-default btn-sm" asp-action="Form" asp-route-page="@(pageCurrent-1)">
+                                <i class="fas fa-chevron-left"></i>
+                            </a>
+                            <a class="btn btn-default btn-sm" asp-action="Form" asp-route-page="@(pageCurrent+1)">
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
+                        <!-- /.btn-group -->
+                    </div>
+                    <!-- /.float-right -->
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

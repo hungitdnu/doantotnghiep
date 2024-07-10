@@ -1,0 +1,19 @@
+﻿@model int
+<div class="content-wrapper" style="min-height: 1604.44px;">
+    <!-- Main content -->
+    <section class="content" style="">
+        <div class="error-page" style="">
+            <h2 class="headline text-danger"><i class="fas fa-exclamation-triangle text-danger"></i></h2>
+
+            <div class="error-content">
+                <h3>Xác nhận xóa khóa du học này?</h3>
+
+                <p>Không thể hoàn tác tác vụ này ! Mọi đơn đăng ký liên quan sẽ bị xóa</p>
+                <a asp-action="PerformDeleteCourse" asp-route-id="@Model" class="btn btn-danger pl-3 pr-3">Xóa</a>
+                <a asp-action="Index" class="btn btn-primary ml-3"> Quay lại trang chủ</a>
+            </div>
+        </div>
+        <!-- /.error-page -->
+    </section>
+    <!-- /.content -->
+</div>
